@@ -1,0 +1,49 @@
+{
+  "name": "context-condenser-vscode",
+  "displayName": "Context Condenser — LVM",
+  "description": "🧊 Cut LLM token costs 90%. Ghost-mode visualization of what your AI actually sees.",
+  "version": "0.1.0",
+  "publisher": "context-condenser",
+  "engines": { "vscode": "^1.85.0" },
+  "categories": ["AI", "Other"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "lvm.copySkeleton",
+        "title": "LVM: Copy Skeleton to Clipboard"
+      },
+      {
+        "command": "lvm.showReport",
+        "title": "LVM: Show Efficiency Report"
+      }
+    ],
+    "configuration": {
+      "title": "Context Condenser (LVM)",
+      "properties": {
+        "lvm.autoIndex": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically re-index files on save"
+        },
+        "lvm.ghostMode": {
+          "type": "boolean",
+          "default": true,
+          "description": "Fade out condensed function bodies in the editor"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "esbuild src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --platform=node --format=cjs",
+    "dev": "npm run build -- --watch"
+  },
+  "dependencies": {
+    "@context-condenser/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "esbuild": "^0.20.0"
+  }
+}

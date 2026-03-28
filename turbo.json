@@ -1,0 +1,30 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": [
+    "**/.env.*local",
+    "tsconfig.json"
+  ],
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["src/**/*.ts", "tsup.config.ts", "package.json"],
+      "outputs": ["dist/**"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "test": {
+      "dependsOn": ["build"],
+      "inputs": ["src/**/*.ts", "test/**/*.ts"],
+      "outputs": ["coverage/**"]
+    },
+    "lint": {
+      "dependsOn": ["^build"],
+      "outputs": []
+    },
+    "clean": {
+      "cache": false
+    }
+  }
+}

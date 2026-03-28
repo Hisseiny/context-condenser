@@ -1,0 +1,9 @@
+{
+  "$schema": "https://context-condenser.dev/schema/config.json",
+  "depth": 1,
+  "maxTokenBudget": 32000,
+  "preserveComments": false,
+  "model": "claude",
+  "languages": ["typescript", "javascript"],
+  "ghostMode": true
+}

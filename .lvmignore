@@ -1,0 +1,30 @@
+# Context-Condenser ignore file (.lvmignore)
+# Syntax is identical to .gitignore — familiar and predictable.
+#
+# Already ignored by default (hard-coded in IgnoreManager):
+#   node_modules/, dist/, build/, .git/, *.min.js, *.map, *.d.ts
+
+# ── Documentation ────────────────────────────────────────────────
+docs/
+*.md
+LICENSE
+CHANGELOG
+
+# ── Large generated / binary files ───────────────────────────────
+*.json
+*.csv
+*.log
+*.lock
+
+# ── Test fixtures (large snapshots) ──────────────────────────────
+__snapshots__/
+fixtures/
+__mocks__/
+
+# ── Vendor / third-party code ─────────────────────────────────────
+vendor/
+third_party/
+
+# ── Coverage reports ──────────────────────────────────────────────
+coverage/
+.nyc_output/

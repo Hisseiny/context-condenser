@@ -1,0 +1,29 @@
+{
+  "name": "@context-condenser/core",
+  "version": "0.1.0",
+  "description": "AST parsing, symbol indexing, and skeleton generation engine",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts",
+    "dev": "tsup src/index.ts --format esm,cjs --dts --watch",
+    "test": "vitest run",
+    "lint": "eslint src"
+  },
+  "dependencies": {
+    "ignore": "^5.3.1",
+    "tree-sitter": "^0.21.0",
+    "tree-sitter-typescript": "^0.21.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.1",
+    "vitest": "^1.2.2"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "@context-condenser/cli",
+  "version": "0.1.0",
+  "description": "CLI for Context-Condenser — scan, serve, init",
+  "type": "module",
+  "author": "Alien",
+  "license": "MIT",
+  "bin": {
+    "lvm": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+  "build": "tsup",
+  "dev": "tsup --watch",
+  "start": "node dist/index.js"
+},
+  "dependencies": {
+    "@context-condenser/core": "workspace:*",
+    "@context-condenser/mcp-server": "workspace:*",
+    "chalk": "^5.3.0",
+    "commander": "^11.1.0",
+    "ora": "^8.0.1"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3"
+  }
+}

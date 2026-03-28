@@ -1,0 +1,185 @@
+# =============================================================================
+# context-condenser — Node.js / npm Dependency Manifest
+# =============================================================================
+#
+# This project is a Node.js monorepo managed with pnpm workspaces + Turborepo.
+# Dependencies are declared in package.json files; this file provides a
+# human-readable reference of every package used across all workspace packages,
+# annotated by purpose and which package(s) consume it.
+#
+# Runtime:  Node.js >= 18.0.0
+# Package manager:  pnpm >= 8.0.0   (install: npm install -g pnpm)
+#
+# To install all dependencies:
+#   pnpm install
+#
+# To install for production only (no devDependencies):
+#   pnpm install --prod
+# =============================================================================
+
+
+# =============================================================================
+# RUNTIME DEPENDENCIES  (shipped in production builds)
+# =============================================================================
+
+# ── AST Parsing ──────────────────────────────────────────────────────────────
+# Used by: @context-condenser/core
+
+tree-sitter@^0.21.0
+# C-native incremental parser with Node.js bindings.
+# Powers the single-pass AST traversal that extracts symbols, imports,
+# call-sites, and type references from source files in O(n) time.
+
+tree-sitter-typescript@^0.21.0
+# tree-sitter grammar for TypeScript and TSX.
+# Provides the language-specific node types (function_declaration,
+# method_definition, interface_declaration, etc.) that the parser maps
+# to CodeSymbol entries.
+
+# ── Schema Validation ─────────────────────────────────────────────────────────
+# Used by: @context-condenser/core, @context-condenser/mcp-server
+
+zod@^3.22.4
+# TypeScript-first schema validation library.
+# Validates MCP tool input schemas (hydrate_context, get_skeleton) and
+# enforces strict types on CondenserEngine configuration at runtime.
+
+# ── File Ignore / Filtering ───────────────────────────────────────────────────
+# Used by: @context-condenser/core
+
+ignore@^5.3.1
+# Implements .gitignore-spec pattern matching.
+# Powers the IgnoreManager — respects both .lvmignore and .gitignore so
+# scanning a React project takes <500ms instead of 30s (node_modules alone
+# has 50k+ files).
+
+# ── MCP Protocol ─────────────────────────────────────────────────────────────
+# Used by: @context-condenser/mcp-server
+
+@modelcontextprotocol/sdk@^0.6.0
+# Official Model Context Protocol SDK.
+# Provides Server, StdioServerTransport, and request schema handlers that
+# bridge Claude Desktop / Gemini to the CondenserEngine via JSON-RPC over
+# stdio.
+
+# ── CLI Display ───────────────────────────────────────────────────────────────
+# Used by: @context-condenser/cli
+
+chalk@^5.3.0
+# Terminal string styling (colors, bold, background colors).
+# Renders the "viral savings dashboard" output — colored token bars,
+# green efficiency percentage, and the overall ASCII report layout.
+
+commander@^11.1.0
+# Full-featured CLI framework.
+# Provides command parsing for `lvm scan`, `lvm serve`, and `lvm init`,
+# including argument handling, option flags (--json, --model, --root),
+# and auto-generated --help output.
+
+ora@^8.0.1
+# Elegant terminal spinner.
+# Shows an animated "Indexing project…" indicator while tree-sitter
+# traverses large repos, preventing the UX from feeling frozen.
+
+
+# =============================================================================
+# DEVELOPMENT DEPENDENCIES  (build, test, lint — not in production bundles)
+# =============================================================================
+
+# ── Language & Type System ────────────────────────────────────────────────────
+# Used by: all packages (root workspace)
+
+typescript@^5.3.3
+# TypeScript compiler. Strict mode enabled across all packages.
+# Config: tsconfig.json (root), extended per-package as needed.
+
+@types/node@^20.11.5
+# Type definitions for the Node.js built-in APIs (fs, path, crypto, os).
+# Required for TypeScript compilation of all server-side packages.
+
+# ── Build Tooling ─────────────────────────────────────────────────────────────
+
+turbo@^1.12.4
+# High-performance monorepo build system with remote caching.
+# Orchestrates build/test/lint pipelines across all workspace packages,
+# using the dependency graph in turbo.json to run tasks in parallel
+# and cache outputs between runs.
+# Used by: root workspace
+
+tsup@^8.0.1
+# Zero-config TypeScript bundler (built on esbuild).
+# Produces ESM + CJS dual-format builds with .d.ts declarations for
+# @context-condenser/core, and ESM-only binaries for cli and mcp-server.
+# Used by: @context-condenser/core, @context-condenser/cli,
+#           @context-condenser/mcp-server
+
+esbuild@^0.20.0
+# Extremely fast JavaScript/TypeScript bundler.
+# Used directly (not via tsup) by the VS Code extension to produce a
+# single CJS bundle that the VS Code extension host can load.
+# Used by: context-condenser-vscode
+
+# ── Testing ───────────────────────────────────────────────────────────────────
+
+vitest@^1.2.2
+# Fast Vite-native test runner with Jest-compatible API.
+# Runs the full test suite: parser extraction, graph BFS/cycle detection,
+# resolver priority logic, ignore-manager filesystem tests, and
+# token estimation edge cases.
+# Used by: root workspace, @context-condenser/core
+
+# ── Linting ───────────────────────────────────────────────────────────────────
+
+eslint@^8.56.0
+# Pluggable JavaScript/TypeScript linter.
+# Enforces code quality across all packages. Integrated into the Turborepo
+# pipeline so `pnpm lint` runs in parallel across packages.
+# Used by: root workspace
+
+# ── Release Management ────────────────────────────────────────────────────────
+
+@changesets/cli@^2.27.1
+# Monorepo versioning and changelog tool.
+# Manages semantic version bumps across workspace packages and generates
+# CHANGELOG entries. Used for `pnpm release` in the CI publish step.
+# Used by: root workspace
+
+# ── VS Code Extension Types ───────────────────────────────────────────────────
+
+@types/vscode@^1.85.0
+# Type definitions for the VS Code Extension API (vscode namespace).
+# Required for TypeScript compilation of the Ghost Mode extension.
+# The vscode module itself is provided at runtime by the VS Code host —
+# it is never bundled.
+# Used by: context-condenser-vscode
+
+
+# =============================================================================
+# WORKSPACE-INTERNAL PACKAGES  (resolved via pnpm workspace protocol)
+# =============================================================================
+#
+# These are not npm packages — they are local packages within this monorepo
+# linked together via "workspace:*" in package.json files.
+#
+# @context-condenser/core        ← consumed by cli, mcp-server, vscode-ext
+# @context-condenser/cli         ← consumed by mcp-server (lvm serve command)
+# @context-condenser/mcp-server  ← consumed by cli (lvm serve delegates here)
+
+
+# =============================================================================
+# SYSTEM / ENVIRONMENT REQUIREMENTS
+# =============================================================================
+#
+# Node.js     >= 18.0.0   (required for native ESM, fetch, crypto.randomUUID)
+# pnpm        >= 8.0.0    (workspace:* protocol + strict lockfile)
+# OS          Any         (macOS, Linux, Windows via WSL2)
+# VS Code     >= 1.85.0   (for the Ghost Mode extension only)
+#
+# tree-sitter builds a native C addon via node-gyp on first install.
+# Prerequisites for native compilation:
+#   macOS:    Xcode Command Line Tools  (`xcode-select --install`)
+#   Ubuntu:   build-essential python3   (`apt install build-essential python3`)
+#   Windows:  windows-build-tools       (`npm install -g windows-build-tools`)
+#
+# CI matrix tested on: Node 18, 20, 22  ×  ubuntu-latest
+# See: .github/workflows/ci.yml

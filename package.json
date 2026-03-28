@@ -1,0 +1,50 @@
+{
+  "name": "context-condenser",
+  "version": "0.1.0",
+  "private": true,
+  "description": "🧊 LVM: Cut LLM token costs by 50-90%. Semantic skeleton compression for any codebase.",
+  "type": "module",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "clean": "turbo run clean && rm -rf .turbo node_modules/.cache",
+    "clean:hard": "rm -rf packages/*/dist .turbo node_modules packages/*/node_modules pnpm-lock.yaml",
+    "release": "changeset publish"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "tree-sitter",
+      "tree-sitter-typescript",
+      "esbuild"
+    ]
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.1",
+    "@types/node": "^20.11.5",
+    "eslint": "^9.1.0",
+    "turbo": "^1.12.4",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.2"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/context-condenser"
+  },
+  "keywords": [
+    "llm",
+    "tokens",
+    "ai",
+    "mcp",
+    "tree-sitter",
+    "claude",
+    "context",
+    "compression",
+    "vscode"
+  ],
+  "license": "MIT"
+}
