@@ -4,7 +4,7 @@
 
 **Stop paying to send the same boilerplate to Claude 100 times a day.**
 
-[![npm version](https://img.shields.io/npm/v/@context-condenser/cli?color=00d4aa&label=lvm%20cli)](https://npmjs.com/package/@context-condenser/cli)
+[![npm version](https://img.shields.io/npm/v/context-condenser/cli?color=00d4aa&label=lvm%20cli)](context-condenser/cli)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![Discord](https://img.shields.io/discord/placeholder?label=discord&color=5865F2)](https://discord.gg/placeholder)
