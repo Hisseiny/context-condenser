@@ -31,7 +31,7 @@ alien@Element115:~/context-condenser$ lvm scan .
 
 ```
 
-*Post your own savings screenshot — tag us [@ContextC68651](https://twitter.com/ContextC68651)*
+*Post your own savings screenshot — tag us [@ContextCondense](https://twitter.com/ContextCondense)*
 
 
 ---
