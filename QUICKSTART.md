@@ -143,7 +143,7 @@ Navigate to any TypeScript or JavaScript project and scan it:
 ```bash
 cd ~/my-project
 /path/to/context-condenser/packages/cli/dist/index.js scan .
-Example: - a project folder you'd like to scan in your directory is 1 folder in from your home directory you would simply type in '..' preceding the path to the context-condenser. 
+Example - a project folder you'd like to scan in your directory is 1 folder in from your home directory you would simply type in '..' preceding the path to the context-condenser. 
 ../context-condenser/packages/cli/dist/index.js scan .
 ```
 
