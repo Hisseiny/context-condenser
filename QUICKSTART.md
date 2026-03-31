@@ -168,6 +168,9 @@ Example - a project folder you would like to scan in your directory is 1 folder 
 **For CI pipelines**, output as JSON:
 ```bash
 ./packages/cli/dist/index.js scan . --json
+Note - if working from the directory folder you just scanned and resides parallel to your contextd-condenser folder - simply type in '..' preceding the path.
+Example -
+../context-condenser/packages/cli/dist/index.js scan . --json
 # {"rawTokens":18308,"condensedTokens":8794,"savingsPercent":"52.0%",...}
 ```
 
